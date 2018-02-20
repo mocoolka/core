@@ -1,0 +1,71 @@
+{
+  "name": "mocoolka-core",
+  "version": "0.1.6",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "author": "fastspeeed@gmail.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mocoolka/core.git"
+  },
+  "scripts": {
+    "lint": "tslint -p ./tsconfig.json",
+    "lint:fix": "tslint -p ./tsconfig.json --fix",
+    "clean": "rm -rf lib/*",
+    "tsc": "tsc",
+    "test": "jest",
+    "watch": "jest --watch --notify",
+    "coverage": "rimraf coverage && jest --coverage",
+    "docs": "rimraf docs && typedoc --name Mocoolka-core --readme README.md --module commonjs --out docs --target es6 --hideGenerator src",
+    "docs-publish": "yarn run docs && touch docs/.nojekyll && gh-pages -d docs -t",
+    "build:all": "rimraf lib && rimraf lib-umd && tsc && webpack  && size-limit ",
+    "build": "rimraf lib && rimraf lib-umd && tsc",
+    "build-prod": "yarn test && yarn run build ",
+    "prepublishOnly1": "yarn run build-prod"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.102",
+    "fp-ts": "^0.6.8",
+    "lodash": "^4.17.5",
+    "monocle-ts": "^0.5.2",
+    "sequency": "^0.18.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^22.1.2",
+    "awesome-typescript-loader": "^3.4.1",
+    "jest": "^22.2.2",
+    "rimraf": "^2.6.2",
+    "ts-node": "^4.1.0",
+    "tslint": "^5.9.1",
+    "typescript": "^2.7.1",
+    "webpack": "^3.10.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.ts$": "<rootDir>/preprocessor.js"
+    },
+    "testMatch": [
+      "<rootDir>/tests/**/*.test.ts"
+    ]
+  },
+  "size-limit": [
+    {
+      "path": "lib-umd/mocoolka-core.min.js",
+      "limit": "15 KB"
+    }
+  ],
+  "files": [
+    "lib",
+    "lib-umd",
+    "LICENSE"
+  ],
+  "keywords": [
+    "mocoolka",
+    "functional"
+  ],
+  "license": "MIT"
+}
